@@ -1,0 +1,141 @@
+@use "./variables.scss" as *;
+.inicio-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+    background-color: $color-bg;
+    color: $color-text-main;
+
+    // --- Sección Hero / Presentación ---
+    .inicio-hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 4rem;
+
+        .inicio-subtitle {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: $color-text-muted;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        h1 {
+            font-family: $font-primary;
+            font-size: 2.8rem;
+            font-weight: 400;
+            letter-spacing: 3px;
+            margin-bottom: 1.5rem;
+            color: $color-text-main;
+        }
+
+        .inicio-divider {
+            width: 50px;
+            height: 1px;
+            background-color: $color-accent;
+            margin-bottom: 2rem;
+        }
+
+        .inicio-logo-wrapper {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba($color-accent, 0.3);
+
+            .imagenINICIO {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: $transition-smooth;
+
+                &:hover {
+                    transform: scale(1.05);
+                }
+            }
+        }
+    }
+
+    // --- Sección de Manifiesto / Descripción ---
+    .inicio-about {
+        max-width: 700px;
+        margin: 0 auto 5rem auto;
+        text-align: center;
+
+        p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: $color-text-muted;
+            font-weight: 300;
+        }
+    }
+
+    // --- Sección de Carrusel Destacado ---
+    .inicio-carousel-section {
+        max-width: 900px;
+        margin: 0 auto;
+
+        .carruselFlex {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+
+            .carousel-img-container {
+                height: 500px;
+                width: 100%;
+                background-color: $color-card-bg;
+
+                img {
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            // Caption Minimalista sobre la imagen
+            .custom-caption {
+                background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%);
+                left: 0;
+                right: 0;
+                bottom: 0;
+                padding: 2.5rem 2rem 1.5rem 2rem;
+                text-align: left;
+
+                h3 {
+                    font-size: 1.5rem;
+                    font-weight: 400;
+                    letter-spacing: 1px;
+                    color: $color-white;
+                    margin-bottom: 0.3rem;
+                }
+
+                p {
+                    font-size: 0.95rem;
+                    color: #e0e0e0;
+                    font-weight: 300;
+                    margin: 0;
+                }
+            }
+        }
+    }
+
+    // --- Media Queries Responsive ---
+    @media (max-width: 768px) {
+        .inicio-hero {
+            h1 {
+                font-size: 2rem;
+            }
+        }
+        
+        .inicio-carousel-section {
+            .carruselFlex {
+                .carousel-img-container {
+                    height: 350px;
+                }
+            }
+        }
+    }
+}

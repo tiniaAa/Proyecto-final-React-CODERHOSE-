@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+GB+J:ital,wght@0,100..400;1,100..400&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+$fontGlobal:"Google Sans", sans-serif;
+$fontCursiva:"Nunito", sans-serif;
+$colorLetra:#ac847c;
+$colorFondo: #f0d4d0;
+
+$color-bg: #FDFBF7;                 // Blanco marfil / fondo principal
+$color-text-main: #2C2A29;          // Gris oscuro elegante (evita el negro pleno)
+$color-text-muted: #6B6765;         // Gris medio para textos secundarios y párrafos
+$color-accent: #D4C5B9;             // Tono nude / arena suave para detalles
+$color-card-bg: #F4F1EA;            // Fondo de respaldo para contenedores de imágenes
+$color-white: #FFFFFF;              // Blanco puro para textos sobre imágenes
+
+// Tipografías
+$font-primary: 'Playfair Display', serif;  // Para títulos elegantes
+$font-secondary: 'Inter', sans-serif;      // Para cuerpo y textos generales (o la que uses por defecto)
+
+// Transiciones
+$transition-smooth: all 0.4s ease;

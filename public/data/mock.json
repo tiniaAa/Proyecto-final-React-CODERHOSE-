@@ -1,0 +1,36 @@
+
+        "precio":1000,
+        "imagen":"/img/PackColales.jpeg",
+        "categoria": "pack",
+        "stock":10,
+        "descripcion":"Pack de bombachas colales"
+    },
+    {
+        "id":6,
+        "nombre":"Colales Grande Beige",
+        "precio":1000,
+        "imagen":"/img/ColalesGrandeBeige.jpeg",
+        "categoria": "simple",
+        "stock":6,
+        "descripcion":"Colales Grande Beige Premium comoda"
+    },
+    {
+        "id":7,
+        "nombre":"Pack Tanga de colores",
+        "precio":1000,
+        "imagen":"/img/PackTanga.jpeg",
+        "categoria": "pack",
+        "stock":15,
+        "descripcion":"Pack de tangas ajustables de distintos colores"
+    },
+    {
+        "id":8,
+        "nombre":"Conjunto Negro Transparente",
+        "precio":10000,
+        "imagen":"/img/ConjuntoNegroTransparente.jpeg",
+        "categoria": "conjunto",
+        "stock":15,
+        "descripcion":"Conjunto de lenceria negro transparente"
+    }
+    
+]

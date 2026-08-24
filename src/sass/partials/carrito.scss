@@ -1,0 +1,119 @@
+@use "./variables.scss" as *;
+
+.contenedorCarrito {
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    margin: 3.5rem;
+    border-radius: 1rem;
+    p{
+        text-align: center;
+        font-weight: bold;
+    }
+    .card-cont {
+        .cart-item {
+            display: flex;
+            flex-direction: row; // Mantiene todo en una sola línea horizontal
+            align-items: center; // Centra verticalmente la foto, textos y botón
+            justify-content: space-between; // Separa los 3 bloques principales (Foto | Datos | Botón)
+            padding: 0 1.5rem; // Espacio interno para que no pegue a los bordes negros externos
+
+            .imagenproducto {
+                width: 11rem;
+                margin: 1rem;
+                border-radius: 0.5rem;
+            }
+
+            .cart-item-info {
+                display: flex;
+                flex-direction: row;
+                flex-grow: 1; 
+                justify-content: space-between; // Ahora distribuye los 4 div.info-group, no los 8 párrafos
+                align-items: center;
+                margin: 1rem 3rem; 
+
+                // Nueva regla para los grupos agrupados
+                .info-group {
+                    display: flex;
+                    flex-direction: row; 
+                    align-items: center;
+                    gap: 0.5rem; // ACÁ CONTROLÁS EL ESPACIO EXACTO ENTRE EL TÍTULO Y EL VALOR. Modificalo a gusto.
+
+                    p {
+                        margin: 0; // Le matamos el margen por defecto a AMBOS párrafos para alinear perfecto
+                    }
+
+                    .DescripcionElemento {
+                        font-weight: bold;
+                    }
+                }
+            }
+
+            button {
+                background-color: #d9534f; // El tono rojo sutil de la lámpara de muestra
+                border: none;
+                border-radius: 6px; // Esquinas redondeadas suaves
+                width: 40px;  // Ancho fijo
+                height: 40px; // Alto fijo
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                flex-shrink: 0; // Evita que el botón se achique si reducís la pantalla
+
+                img {
+                    width: 20px; // Controla el tamaño del tachito adentro del botón
+                    height: 20px;
+                }
+            }
+        }
+    }
+}
+.contenedorControles{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 1rem;
+    .totalCarrito{
+        display: flex;
+        align-items: center;
+        p{
+            margin-bottom: 0;
+            font-weight: bold;
+        }
+        .btnPagar{
+            margin-left: 1.5rem;
+            width: 8rem;
+            height: 2rem;
+            background-color: #80EF80;
+            border-radius: 5px;
+            
+        }
+    }
+    .vaciarCarrito{
+        margin-top: 3rem;
+        width: 20%;
+        height: 2.5rem;
+        //border: 0px;
+        border-radius: 5px;
+        background-color: #d9534f;
+        color:white;
+    }
+}
+.card-header{
+    background-color: $colorFondo;
+    h4{
+        color: $colorLetra;
+    }
+    small{
+        color: black;
+    }
+}
+.btn{
+    background-color: #80EF80;
+    color: black;
+}
+.formulario{
+    margin:3rem;
+}

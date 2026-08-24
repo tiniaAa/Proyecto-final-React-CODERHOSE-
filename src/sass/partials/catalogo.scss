@@ -1,0 +1,30 @@
+@use "./variables.scss" as *;
+
+.card{
+    //max-width: 22rem;
+    margin: 1rem;
+    padding: 0.25rem;
+    background-color: #FFB8B8;
+    .card-body{
+        div{
+            display:  flex;
+            justify-content: center;
+            .agregarCarrito{
+                border-radius: 5px;
+                padding: 0.25rem;
+                margin-top: 1rem;
+                font-family: $fontCursiva;
+                font-size: 1.5;
+                background-color: $colorFondo;
+            }
+            .agregarCarrito:hover{
+                transition: .5s;
+                background-color: white;
+            }
+        }
+    }
+    
+}
+.imagenDetail{
+    height: 25rem;
+}
