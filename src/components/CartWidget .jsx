@@ -9,7 +9,6 @@ const CartWidget = () => {
         <div className="position-relative d-inline-block">
             <IoMdCart size={28} />
             {cart.length >0 && <Badge className="badge" bg="danger position-absolute top-0 start-100 translate-middle rounded-pill">{cantidadCarrito()}</Badge> }
-            
         </div>
     )
 }

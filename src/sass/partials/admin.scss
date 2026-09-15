@@ -1,0 +1,12 @@
+// Variables obligatorias
+@use "./variables.scss" as *;
+
+
+// Clases custom para aplicar el tema
+.admin-theme-bg {
+  background-color: $colorFondoo !important;
+}
+
+.admin-theme-text {
+  color: $colorLetraa !important;
+}

@@ -17,9 +17,11 @@ const Item = (props) => {
                 <Card.Text>{props.producto.descripcion}</Card.Text>
                 <Card.Text className="fw-bold">${props.producto.precio}</Card.Text>
                 
-                                <Link to={`/productoDetalle/${props.producto.id}`} className='btn btn-primary m-3'>Ver mas</Link>
+                <Link to={`/productoDetalle/${props.producto.id}`} className='btn btn-primary m-3'>Ver mas</Link>
             </Card.Body>
         </Card>
+
+
     );
 }
 

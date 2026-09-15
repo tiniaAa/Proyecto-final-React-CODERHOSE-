@@ -2,47 +2,38 @@ import { collection, doc, getDoc, getDocs, query, where } from "firebase/firesto
 import { dataBase } from "./firebaseConfig";
 
 
-export const getProductos = (type) => {
-    
-    const productosRef = collection(dataBase, "productos");
-    
-    // Evaluamos ANTES de hacer la petición
-    // Si hay type, armamos la query con where. Si no, usamos la colección entera.
-    const consulta = type 
-        ? query(productosRef, where('categoria', '==', type))
-        : productosRef;
+// services/productos.js
+const API_URL = "http://localhost:8081/api/productos";
 
-    // Hacemos un solo return que SIEMPRE devuelve una Promesa
-    return getDocs(consulta)
-        .then((snapshot) => {
-            if (snapshot.empty) return [];
-            
-            return snapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...doc.data()
-            }));
+export const getProductos = (type) => {
+    // Si más adelante agregamos el filtro en el backend, la URL sería:
+    // const url = type ? `${API_URL}?categoria=${type}` : API_URL;
+    const url = API_URL; 
+
+    return fetch(url)
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error("Error en la petición al backend: " + response.statusText);
+            }
+            return response.json(); // Spring Boot ya nos devuelve el JSON limpio
         })
         .catch((error) => {
-            throw new Error("Error al consultar Firebase: " + error.message);
+            throw new Error("Error al consultar Spring Boot: " + error.message);
         });
 }
 
 export const getOneProductos = (id) => {
-    // 1. Creamos la referencia DIRECTA al documento. No usamos 'query' ni 'where' acá.
-    const docRef = doc(dataBase, "productos", id);
+    // Nota: ¡Todavía tenemos que crear este endpoint en Spring Boot!
+    // Asumiendo que será un GET a /api/productos/{id}
+    const url = `${API_URL}/${id}`;
 
-    // 2. Ejecutamos la petición para traer SOLO ese documento
-    return getDoc(docRef)
-        .then((snapshot) => {
-            // 3. getDoc no devuelve un array. Usamos .exists() para verificar si el ID es real.
-            if (snapshot.exists()) {
-                return { 
-                    id: snapshot.id, 
-                    ...snapshot.data() 
-                };
-            } else {
-                throw new Error("Producto no encontrado en la base de datos");
+    return fetch(url)
+        .then((response) => {
+            if (!response.ok) {
+                if (response.status === 404) throw new Error("Producto no encontrado en la base de datos");
+                throw new Error("Error en el servidor");
             }
+            return response.json();
         })
         .catch((error) => {
             throw new Error("Error al obtener el producto: " + error.message);

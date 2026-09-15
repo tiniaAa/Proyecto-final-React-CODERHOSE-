@@ -13,6 +13,7 @@ import Error from './components/Error';
 import CheckoutContainer from './components/CheckoutContainer'
 import { CartProvider } from './context/CartContext';
 import CartContainer from './components/CartContainer';
+import AdminContainer from './admin/AdminContainer';
 function App() {
   
 
@@ -24,6 +25,7 @@ function App() {
             <main className="main-content">
               <Routes>
                 <Route path='/' element={<Inicio/>}/>
+                <Route path='/admin' element={<AdminContainer/>}/>
                 <Route path='/catalogo' element={<ItemLisContainer mensaje={"Catalogo"}/>}/>
                 <Route path='/catalogo/filtro/:type' element={<ItemLisContainer mensaje={"Categoria:"}/>}/>
                 <Route path='/productoDetalle/:id' element={<ItemDetailContainer/>}/>
