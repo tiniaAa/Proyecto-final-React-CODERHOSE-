@@ -67,7 +67,7 @@ const ItemDetail = ({ producto }) => {
                                 <ItemCount stock={stockDisponible} onAdd={onAdd} />
                             ) : (
                                 <div className="d-grid gap-2">
-                                    <Button as={Link} to="/cart" variant="dark" className="py-2">
+                                    <Button as={Link} to="/carrito" variant="dark" className="py-2">
                                         Ir al carrito
                                     </Button>
                                     <Button as={Link} to="/" variant="outline-secondary" className="py-2">

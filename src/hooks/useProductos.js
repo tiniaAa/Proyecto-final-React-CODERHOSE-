@@ -1,34 +1,41 @@
 import { useEffect, useState } from "react";
-// Se agrupan los imports en una sola línea
 import { getProductos } from "../services/productos";
 
-export const useProductos = (type) => {
+// Agregamos isAdmin con valor por defecto false
+export const useProductos = (type, isAdmin = false) => {
     const [productos, setProductos] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [trigger, setTrigger] = useState(0);
+
+    const refetch = () => {
+        setTrigger(prev => prev + 1);
+    };
 
     useEffect(() => {
-        let isActive = true;
-        
+        let isMounted = true;
         setLoading(true); 
         
-        getProductos(type)
+        // Le pasamos el isAdmin al servicio
+        getProductos(type, isAdmin)
             .then(data => {
-                if (isActive) {
+                if (isMounted) {
                     setProductos(data);
                     setLoading(false);
                 }
             })
-            .catch(error => {
-                if (isActive) {
-                    setError(error);
+            .catch(err => {
+                if (isMounted) {
+                    setError(err);
                     setLoading(false);
                 }
             });
+            
         return () => {
-            isActive = false;
+            isMounted = false;
         };
-    }, [type]);
+    // El useEffect reacciona si cambia el tipo, el trigger o el rol
+    }, [type, trigger, isAdmin]); 
 
-    return { productos, loading, error };
+    return { productos, loading, error, refetch };
 }

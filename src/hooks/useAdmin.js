@@ -1,46 +1,64 @@
 import { useState } from 'react';
+import { createProducto, updateProducto, deleteProducto, restoreProducto } from '../services/productos';
 
 export const useAdmin = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const [success, setSuccess] = useState(false);
+    const [success, setSuccess] = useState(null); // Ahora guarda strings dinámicos
 
-    const crearProducto = async (datosFormulario) => {
+    const ejecutarAccion = async (datos, accion) => {
         setLoading(true);
         setError(null);
-        setSuccess(false);
+        setSuccess(null); // Limpiamos mensajes anteriores
 
         try {
-            // Adaptamos los datos para que coincidan con el DTO de Spring Boot
-            const payload = {
-                nombre: datosFormulario.nombre,
-                precio: parseFloat(datosFormulario.precio),
-                stock: parseInt(datosFormulario.stock, 10),
-                categoria: datosFormulario.categoria,
-                descripcion: datosFormulario.descripcion,
-                // Simulamos la ruta estática extrayendo el nombre del archivo
-                rutaImagen: datosFormulario.imagen ? `/img/${datosFormulario.imagen.name}` : ''
-            };
-
-            const response = await fetch("http://localhost:8081/api/productos", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(payload)
-            });
-
-            if (!response.ok) {
-                throw new Error("Ocurrió un error al intentar guardar en el servidor.");
-            }
-
-            setSuccess(true);
+            if (accion === 'crear') {
+                const payload = {
+                    nombre: datos.nombre,
+                    precio: parseFloat(datos.precio),
+                    stock: parseInt(datos.stock, 10),
+                    categoria: datos.categoria,
+                    descripcion: datos.descripcion,
+                    rutaImagen: datos.imagen ? `/img/${datos.imagen.name}` : ''
+                };
+                
+                await createProducto(payload);
+                setSuccess("¡Producto guardado exitosamente en el catálogo!");
+                
+            } else if (accion === 'actualizar') {
+                const payload = {
+                    nombre: datos.nombre,
+                    precio: parseFloat(datos.precio),
+                    stock: parseInt(datos.stock, 10),
+                    categoria: datos.categoria,
+                    descripcion: datos.descripcion,
+                    // Si subió una imagen nueva, usamos esa. Si no, mantenemos la ruta original.
+                    rutaImagen: datos.imagenNueva ? `/img/${datos.imagenNueva.name}` : datos.imagen
+                };
+                
+                // datos incluye el id cuando viene del formulario de edición
+                await updateProducto(datos.id, payload);
+                setSuccess(`¡"${datos.nombre}" fue modificado con éxito!`);
+                
+            } else if (accion === 'eliminar') {
+                await deleteProducto(datos);
+                setSuccess("El producto fue dado de baja (Inactivo).");
+                
+            } else if (accion === 'restaurar') {
+                // NUEVA LÓGICA DE RESTAURACIÓN
+                await restoreProducto(datos);
+                setSuccess("¡El producto fue restaurado y vuelve a estar visible en el catálogo público!");
+            }       
+            
         } catch (err) {
             setError(err.message);
+            return false; // <-- Agregamos esto: Avisamos que falló
         } finally {
             setLoading(false);
         }
+        
+        return true;
     };
 
-    return { crearProducto, loading, error, success };
+    return { ejecutarAccion, loading, error, success };
 };

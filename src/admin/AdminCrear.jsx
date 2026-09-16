@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Form, Button, Row, Col, Card } from 'react-bootstrap';
 
 // 1. Recibimos la función onGuardarProducto como prop desde el Contenedor
-const Admin = ({ onGuardarProducto }) => {
+const AdminCrear = ({ onGuardarProducto }) => {
     const [producto, setProducto] = useState({
         nombre: '',
         precio: '',
@@ -83,4 +83,4 @@ const Admin = ({ onGuardarProducto }) => {
     );
 };
 
-export default Admin;
+export default AdminCrear;
