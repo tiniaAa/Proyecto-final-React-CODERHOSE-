@@ -16,6 +16,17 @@ const Checkout = ({ guardarComprador, irAResumen }) => {
                 </Form.Group>
             </Row>
             
+            <Form.Group className="mb-3" controlId="email">
+                <Form.Label className="fw-bold">Correo Electrónico</Form.Label>
+                <Form.Control 
+                    type="email" 
+                    name="email" 
+                    placeholder="tu_correo@ejemplo.com" 
+                    required 
+                    onChange={guardarComprador}
+                />
+            </Form.Group>
+
             <Form.Group className="mb-3" controlId="direccion">
                 <Form.Label className="fw-bold">Dirección</Form.Label>
                 <Form.Control type="text" name="direccion" placeholder="Calle Falsa 123, Piso 1 Dpto B" required onChange={guardarComprador}/>

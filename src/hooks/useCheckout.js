@@ -13,6 +13,7 @@ export const useCheckout = () => {
         const payload = {
             compradorNombre: comprador.nombre,
             compradorApellido: comprador.apellido,
+            compradorEmail: comprador.email,
             compradorDireccion: comprador.direccion,
             compradorCiudad: comprador.ciudad,
             compradorCp: comprador.codigoPostal,
