@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { createOrden } from '../services/ordenes';
-
+import { crearPreferenciaPago } from '../services/mercadoPago';
 export const useCheckout = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -19,6 +19,7 @@ export const useCheckout = () => {
             compradorCp: comprador.codigoPostal,
             compradorProvincia: comprador.provincia,
             tipoEnvio: comprador.tipoEnvio,
+            compradorTelefono: comprador.telefono,
             
             // Mapeamos el carrito al formato de ItemCompraDto
             items: cart.map(item => ({
@@ -39,6 +40,23 @@ export const useCheckout = () => {
             setLoading(false);
         }
     };
+    
 
-    return { procesarOrden, loading, error };
+    const pagarConMercadoPago = async (idOrden) => {
+        try {
+            setLoading(true);
+            setError(null);
+            
+            // Usamos el servicio puro
+            const data = await crearPreferenciaPago(idOrden);
+            
+            // Redirigimos al usuario
+            window.location.href = data.url; 
+            
+        } catch (err) {
+            setError(err.message);
+            setLoading(false);
+        }
+    };
+    return { procesarOrden, pagarConMercadoPago, loading, error };
 };

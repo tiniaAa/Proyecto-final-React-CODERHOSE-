@@ -27,6 +27,11 @@ const Checkout = ({ guardarComprador, irAResumen }) => {
                 />
             </Form.Group>
 
+            <Form.Group className="mb-3" controlId="telefono">
+                <Form.Label className="fw-bold">Número de Teléfono</Form.Label>
+                <Form.Control type="tel" name="telefono" placeholder="Ej: 11 2233 4455" required onChange={guardarComprador}/>
+            </Form.Group>
+
             <Form.Group className="mb-3" controlId="direccion">
                 <Form.Label className="fw-bold">Dirección</Form.Label>
                 <Form.Control type="text" name="direccion" placeholder="Calle Falsa 123, Piso 1 Dpto B" required onChange={guardarComprador}/>
@@ -55,7 +60,14 @@ const Checkout = ({ guardarComprador, irAResumen }) => {
                     <option value="local">Retiro en el local</option>
                 </Form.Select>
             </Form.Group>
-            
+            <Form.Group className="mb-4" controlId="metodoPago">
+                <Form.Label className="fw-bold">Método de Pago</Form.Label>
+                <Form.Select name="metodoPago" required defaultValue="" onChange={guardarComprador}>
+                    <option value="" disabled>Seleccioná cómo querés pagar...</option>
+                    <option value="efectivo">Efectivo / Transferencia (Acordar con el vendedor)</option>
+                    <option value="mercadopago">Mercado Pago (Tarjetas, RapiPago, Dinero en cuenta)</option>
+                </Form.Select>
+            </Form.Group>
             <div className="d-grid gap-2">
                 <Button variant="dark" size="lg" type="submit" className="btn-continuar">
                     Revisar Resumen

@@ -69,7 +69,10 @@ const AdminModificar = ({ productoInicial, onActualizarProducto, onEliminarProdu
                                 <Form.Label className="fw-bold mb-1 small">Precio ($)</Form.Label>
                                 <Form.Control type="number" name="precio" value={producto.precio} onChange={handleChange} className="display-6 fs-3" required />
                             </Form.Group>
-
+                            <Form.Group className="mb-4">
+                                <Form.Label className="fw-bold mb-1 small">Stock Disponible</Form.Label>
+                                <Form.Control type="number" name="stock" value={producto.stock} onChange={handleChange} className="fw-bold fs-5" required />
+                            </Form.Group>
                             <div className="mb-4">
                                 <h6 className="fw-bold mb-2">Lo que tenés que saber de este producto</h6>
                                 <Form.Group>

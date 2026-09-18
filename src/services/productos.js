@@ -1,9 +1,10 @@
+// CORRECCIÓN: Apuntamos al puerto 8080 de Spring Boot
+const API_URL = "http://localhost:8080/api/productos";
 
-const API_URL = "http://localhost:8081/api/productos";
+// Helper para obtener el token guardado en el LocalStorage
+const getToken = () => localStorage.getItem('token');
 
 export const getOneProductos = (id) => {
-    // Nota: ¡Todavía tenemos que crear este endpoint en Spring Boot!
-    // Asumiendo que será un GET a /api/productos/{id}
     const url = `${API_URL}/${id}`;
 
     return fetch(url)
@@ -19,20 +20,21 @@ export const getOneProductos = (id) => {
         });
 }
 
-
-
 // GET: Obtener todos (Admin) o filtrar por categoría (Público)
 export const getProductos = (type, isAdmin = false) => {
     let url = API_URL;
+    const headers = {};
     
-    // Decidimos qué endpoint de Spring Boot usar
     if (isAdmin) {
         url = `${API_URL}/admin/todos`;
+        // Si es admin, inyectamos el token
+        const token = getToken();
+        if (token) headers['Authorization'] = `Bearer ${token}`;
     } else if (type) {
         url = `${API_URL}?categoria=${type}`;
     }
 
-    return fetch(url)
+    return fetch(url, { headers })
         .then((response) => {
             if (!response.ok) throw new Error("Error en la petición al backend");
             return response.json();
@@ -49,7 +51,10 @@ export const getProductos = (type, isAdmin = false) => {
 export const createProducto = (payload) => {
     return fetch(API_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${getToken()}` // Pase VIP
+        },
         body: JSON.stringify(payload)
     }).then(response => {
         if (!response.ok) throw new Error("Ocurrió un error al intentar guardar en el servidor.");
@@ -62,7 +67,8 @@ export const updateProducto = (id, payload) => {
     return fetch(`${API_URL}/${id}`, {
         method: "PUT",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${getToken()}` // Pase VIP
         },
         body: JSON.stringify(payload)
     }).then(response => {
@@ -74,22 +80,25 @@ export const updateProducto = (id, payload) => {
 // DELETE (Delete): Eliminar un producto
 export const deleteProducto = (id) => {
     return fetch(`${API_URL}/${id}`, {
-        method: "DELETE"
+        method: "DELETE",
+        headers: {
+            "Authorization": `Bearer ${getToken()}` // Pase VIP
+        }
     }).then(response => {
         if (!response.ok) throw new Error("Error al eliminar el producto en el servidor.");
-        
-        // El método DELETE suele devolver un 204 No Content (sin cuerpo). 
-        // Verificamos si hay texto antes de intentar parsearlo a JSON para evitar errores.
         return response.text().then(text => text ? JSON.parse(text) : { success: true });
     });
 }
+
 // PUT (Restore): Restaurar un producto inactivo
 export const restoreProducto = (id) => {
     return fetch(`${API_URL}/${id}/restaurar`, {
-        method: "PUT"
+        method: "PUT",
+        headers: {
+            "Authorization": `Bearer ${getToken()}` // Pase VIP
+        }
     }).then(response => {
         if (!response.ok) throw new Error("Error al restaurar el producto en el servidor.");
         return response.text().then(text => text ? JSON.parse(text) : { success: true });
     });
-}   
-
+}

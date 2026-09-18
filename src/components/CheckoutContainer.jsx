@@ -12,7 +12,7 @@ const CheckoutContainer = () => {
     const [ordenId, setOrdenId] = useState('');
     
     // Extraemos las funciones y estados del hook
-    const { procesarOrden, loading, error } = useCheckout();
+    const { procesarOrden,pagarConMercadoPago, loading, error } = useCheckout();
 
     const guardarComprador = (e) => {
         setComprador({
@@ -32,8 +32,13 @@ const CheckoutContainer = () => {
         
         if (resultado.success) {
             setOrdenId(resultado.id);
-            setPaso('finalizado');
             vaciar(); 
+
+            if(comprador.metodoPago === 'mercadopago'){
+                await pagarConMercadoPago(resultado.id);
+            } else {
+                setPaso('finalizado');
+            }
         } else {
             alert("Atención: " + error); // Opcional: podrías mostrar el error visualmente en vez de un alert
         }

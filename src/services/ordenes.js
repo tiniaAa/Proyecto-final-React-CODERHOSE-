@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8081/api/ordenes";
+const API_URL = "http://localhost:8080/api/ordenes";
 
 // POST (Create): Enviar la orden al servidor
 export const createOrden = async (payload) => {
