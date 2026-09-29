@@ -1,60 +1,63 @@
 import { createContext, useEffect, useState } from "react";
-import Item from "../components/Item";
 
 export const CartContext = createContext();
 
 export const CartProvider =({children})=>{
     const [cart, setCart] = useState(() => {
         const carritoGuardado = localStorage.getItem("carrito_amma");
-        return carritoGuardado ? JSON.parse(carritoGuardado) : [];
+        
+        const parsed = carritoGuardado ? JSON.parse(carritoGuardado) : [];
+        const carritoValido = parsed.every(p => p.variacion && p.variacion.id) ? parsed : [];
+        return carritoValido;
     });
+
     useEffect(() => {
         localStorage.setItem("carrito_amma", JSON.stringify(cart));
     }, [cart]);
 
-    const agregar=(item,cant)=>{
-        if(existeProducto(item.id)){
-            setCart(cart.map((prod)=>{
-                if(prod.id === item.id){
-                    
+    // Ojo acá: ahora recibimos el item Y la variacionElegida
+    const agregar = (item, variacion, cant) => {
+        if (existeProducto(variacion.id)) {
+            setCart(cart.map((prod) => {
+                if(prod.variacion.id === variacion.id){
                     return {...prod, cantidad: prod.cantidad + cant }
-                }else{
+                } else {
                     return prod
-                }}));
-        }
-        else{
-            setCart([...cart, {...item, cantidad:cant}])
+                }
+            }));
+        } else {
+            setCart([...cart, {...item, variacion: variacion, cantidad: cant}])
         }
     }
-    const eliminar=(id)=>{
-        setCart(cart.filter((prod)=> prod.id !== id))
+
+    const eliminar = (variacionId) => {
+        setCart(cart.filter((prod) => prod.variacion.id !== variacionId))
     }
-    const vaciar=()=>{
+
+    const vaciar = () => {
         setCart([])
     }
-    const existeProducto=(id)=>{
-        return cart.some((prod)=>prod.id===id)
+
+    const existeProducto = (variacionId) => {
+        return cart.some((prod) => prod.variacion.id === variacionId)
     }
 
     const totalPago = () => {
-    return cart.reduce((acumulador, prod) => acumulador + (prod.cantidad * prod.precio), 0);
-}
-    const cantidadCarrito=()=>{
-        return cart.reduce((acumulador,prod)=>acumulador+=prod.cantidad,0)
+        return cart.reduce((acumulador, prod) => acumulador + (prod.cantidad * prod.precio), 0);
     }
 
-    const cantidadItem =(id)=>{
-        const porductoCarrito = cart.find((prod)=>prod.id===id)
-        if(porductoCarrito){
-            return porductoCarrito.cantidad;
-        }
-        else{
-            return 0;
-        }
+    const cantidadCarrito = () => {
+        return cart.reduce((acumulador, prod) => acumulador += prod.cantidad, 0)
     }
-    return(<>
-        <CartContext.Provider value={{cart,agregar,eliminar,vaciar,totalPago,cantidadCarrito,cantidadItem}}>
+
+    const cantidadItem = (variacionId) => {
+        const productoCarrito = cart.find((prod) => prod.variacion.id === variacionId)
+        return productoCarrito ? productoCarrito.cantidad : 0;
+    }
+
+    return(
+        <CartContext.Provider value={{cart, agregar, eliminar, vaciar, totalPago, cantidadCarrito, cantidadItem}}>
             {children}
         </CartContext.Provider>
-    </>)
+    )
 }

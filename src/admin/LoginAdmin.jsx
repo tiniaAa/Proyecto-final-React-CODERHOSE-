@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-// Recibimos la función como prop
 const LoginAdmin = ({ onLoginExitoso }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -19,9 +18,10 @@ const LoginAdmin = ({ onLoginExitoso }) => {
 
       if (response.ok) {
         const data = await response.json();
-        localStorage.setItem('token', data.token);
         
-        // ¡Magia! Le avisamos al componente padre que dibuje el panel
+        // Guardamos en sessionStorage en lugar de localStorage
+        sessionStorage.setItem('token', data.token);
+        
         onLoginExitoso(); 
       } else {
         setError('Credenciales incorrectas. Intente nuevamente.');

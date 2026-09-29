@@ -73,7 +73,7 @@ const { productos, loading, error, refetch } = useProductos(null, true);
                         productoInicial={productoSeleccionado} 
                         onActualizarProducto={handleActualizar}
                         onEliminarProducto={handleEliminar}
-                        onRestaurarProducto={handleRestaurar} // <-- Nueva prop
+                        onRestaurarProducto={handleRestaurar}
                     />
                 </>
             )}
