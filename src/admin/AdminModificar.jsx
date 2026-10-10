@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Spinner, Badge } from 'react-bootstrap';
 import { BsTrash } from 'react-icons/bs';
 import { uploadToCloudinary } from '../services/cloudinary'; 
@@ -7,7 +7,7 @@ const AdminModificar = ({ productoInicial, onActualizarProducto, onEliminarProdu
     
     const [producto, setProducto] = useState({ ...productoInicial });
     
-    // Arrays para manejar las imágenes
+    // Arrays para manejar las imÃ¡genes
     const [imagenesExistentes, setImagenesExistentes] = useState(productoInicial.rutasImagenes || []);
     const [imagenesArchivos, setImagenesArchivos] = useState([]);
     const [subiendoFotos, setSubiendoFotos] = useState(false);
@@ -21,7 +21,7 @@ const AdminModificar = ({ productoInicial, onActualizarProducto, onEliminarProdu
     useEffect(() => {
         setProducto({ ...productoInicial });
         setImagenesExistentes(productoInicial.rutasImagenes || []);
-        setImagenesArchivos([]); // Reseteamos selección
+        setImagenesArchivos([]); // Reseteamos selecciÃ³n
         setVariaciones(
             productoInicial.variaciones && productoInicial.variaciones.length > 0 
                 ? [...productoInicial.variaciones] 
@@ -75,7 +75,7 @@ const AdminModificar = ({ productoInicial, onActualizarProducto, onEliminarProdu
             const promesasSubida = imagenesArchivos.map(file => uploadToCloudinary(file));
             const urlsNuevas = await Promise.all(promesasSubida);
 
-            // Juntamos las que no borró con las recién subidas
+            // Juntamos las que no borrÃ³ con las reciÃ©n subidas
             const urlsFinales = [...imagenesExistentes, ...urlsNuevas];
 
             await onActualizarProducto({ 
@@ -96,7 +96,7 @@ const AdminModificar = ({ productoInicial, onActualizarProducto, onEliminarProdu
             <Form onSubmit={handleSubmit}>
                 <Row className="gx-5">
                     
-                    {/* GESTOR DE IMÁGENES */}
+                    {/* GESTOR DE IMÃGENES */}
                     <Col xs={12} md={5} className="mb-4">
                         <div className="p-3 border rounded bg-light mb-3">
                             <h6 className="fw-bold mb-3">Imágenes Actuales</h6>
@@ -185,7 +185,7 @@ const AdminModificar = ({ productoInicial, onActualizarProducto, onEliminarProdu
                             ))}
                             
                             <Button variant="outline-dark" size="sm" onClick={agregarVariacion} className="mt-2 mb-4 w-50">
-                                + Agregar variación
+                                + Agregar variacián
                             </Button>
 
                             <hr className="my-3" />
@@ -197,7 +197,7 @@ const AdminModificar = ({ productoInicial, onActualizarProducto, onEliminarProdu
                                 
                                 {producto.activo ? (
                                     <Button type="button" variant="outline-danger" className="py-2" onClick={() => onEliminarProducto(producto.id)}>
-                                        Dar de Baja (Ocultar del Catálogo)
+                                        Dar de Baja (Ocultar del Catalogo)
                                     </Button>
                                 ) : (
                                     <Button type="button" variant="success" className="py-2 shadow-sm fw-bold" onClick={() => onRestaurarProducto(producto.id)}>

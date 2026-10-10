@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { Form, Button, Row, Col, Card, Spinner } from 'react-bootstrap';
 import { BsTrash } from 'react-icons/bs'; 
 import { uploadToCloudinary } from '../services/cloudinary'; // Importamos tu nuevo servicio
@@ -14,7 +14,7 @@ const AdminCrear = ({ onGuardarProducto }) => {
     // Guardamos los archivos seleccionados en un array
     const [imagenesArchivos, setImagenesArchivos] = useState([]);
     
-    // Estado para deshabilitar el botón mientras se suben las fotos a la nube
+    // Estado para deshabilitar el botÃ³n mientras se suben las fotos a la nube
     const [subiendoFotos, setSubiendoFotos] = useState(false);
 
     const [variaciones, setVariaciones] = useState([
@@ -27,7 +27,7 @@ const AdminCrear = ({ onGuardarProducto }) => {
     };
 
     const handleFileChange = (e) => {
-        // Convertimos la selección en un Array real
+        // Convertimos la selecciÃ³n en un Array real
         setImagenesArchivos(Array.from(e.target.files));
     };
 
@@ -72,7 +72,7 @@ const AdminCrear = ({ onGuardarProducto }) => {
             });
 
         } catch (error) {
-            alert("Fallo la subida a Cloudinary. Revisá la consola.");
+            alert("Fallo la subida a Cloudinary. RevisÃ¡ la consola.");
         } finally {
             setSubiendoFotos(false);
         }
@@ -105,8 +105,8 @@ const AdminCrear = ({ onGuardarProducto }) => {
                     </Form.Group>
 
                     <Form.Group as={Col} md="6">
-                        <Form.Label className="fw-semibold">Subir Imágenes (Puedes seleccionar varias)</Form.Label>
-                        {/* El atributo 'multiple' te deja seleccionar más de una foto */}
+                        <Form.Label className="fw-semibold">Subir Imagenes (Puedes seleccionar varias)</Form.Label>
+                        {/* El atributo 'multiple' te deja seleccionar mas de una foto */}
                         <Form.Control type="file" multiple accept="image/*" onChange={handleFileChange} required />
                         <Form.Text className="text-muted">
                             {imagenesArchivos.length > 0 ? `Seleccionaste ${imagenesArchivos.length} imágenes.` : ''}
@@ -125,7 +125,7 @@ const AdminCrear = ({ onGuardarProducto }) => {
                 {variaciones.map((v, index) => (
                     <Row key={index} className="mb-3 align-items-end">
                         <Form.Group as={Col} md="3">
-                            <Form.Label className="small text-muted">Talle (Ej: M, Único)</Form.Label>
+                            <Form.Label className="small text-muted">Talle (Ej: M, único)</Form.Label>
                             <Form.Control type="text" placeholder="M" value={v.talle} onChange={(e) => handleVariacionChange(index, 'talle', e.target.value)} required />
                         </Form.Group>
                         <Form.Group as={Col} md="4">

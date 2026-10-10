@@ -1,17 +1,31 @@
-import { useState } from 'react';
-import { Container, Row, Col, Button, Alert, Spinner, ButtonGroup } from 'react-bootstrap';
+import { useState, useEffect } from 'react';
+import { Container, Row, Col, Button, Spinner, ButtonGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import AdminCrear from './AdminCrear';
 import AdminModificarContainer from "./AdminModificarContainer"
 import { useAdmin } from '../hooks/useAdmin';
+import Swal from 'sweetalert2';
 
 export const AdminContainer = () => {
-    // Estado para controlar qué módulo del dashboard estamos viendo
     const [vistaActiva, setVistaActiva] = useState('crear');
-
-    // Cambiamos 'crearProducto' por algo genérico como 'ejecutarAccion'
-    // Asumimos que 'success' ahora es un texto dinámico que viene del hook
     const { ejecutarAccion, loading, error, success } = useAdmin();
+
+    useEffect(() => {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true
+        });
+
+        if (success) {
+            Toast.fire({ icon: 'success', title: success });
+        }
+        if (error) {
+            Toast.fire({ icon: 'error', title: error });
+        }
+    }, [success, error]);
 
     return (
         <Container className="mt-5 mb-5">
@@ -29,7 +43,6 @@ export const AdminContainer = () => {
                 <Col xs={12} md={3}></Col>
             </Row>
 
-            {/* Menú de Navegación Interna */}
             <Row className="mb-4">
                 <Col className="d-flex justify-content-center">
                     <ButtonGroup className="shadow-sm">
@@ -48,31 +61,11 @@ export const AdminContainer = () => {
                     </ButtonGroup>
                 </Col>
             </Row>
-
-            {/* Sistema de feedback dinámico */}
-            {error && (
-                <Row className="mb-3">
-                    <Col>
-                        <Alert variant="danger" className="text-center fw-semibold shadow-sm">{error}</Alert>
-                    </Col>
-                </Row>
-            )}
             
-            {success && (
-                <Row className="mb-3">
-                    <Col>
-                        <Alert variant="success" className="text-center fw-semibold shadow-sm">
-                            {success} {/* Ahora renderiza el texto exacto que devuelva el hook */}
-                        </Alert>
-                    </Col>
-                </Row>
-            )}
-            
-            {/* Renderizado condicional: Spinner vs Vistas */}
             {loading ? (
                 <Row className="mt-5">
                     <Col className="d-flex flex-column align-items-center">
-                        <Spinner animation="border" role="status" variant="secondary" />
+                        <Spinner animation="grow" variant="dark" />
                         <span className="mt-3 fw-semibold admin-theme-text">Procesando solicitud...</span>
                     </Col>
                 </Row>
