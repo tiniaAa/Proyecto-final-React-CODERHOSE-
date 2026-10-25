@@ -16,9 +16,14 @@ const Header = () => {
                         <Nav className="ms-auto">
                             <NavLink to="/catalogo" className={"nav-link"}>Catalogo</NavLink>
                             <NavDropdown title="Categorias" id="basic-nav-dropdown">                                
-                                <NavLink to="/catalogo/filtro/pack" className="dropdown-item">Pack </NavLink>                                
-                                <NavLink to="/catalogo/filtro/conjunto" className="dropdown-item">Conjunto</NavLink>
-                                <NavLink to="/catalogo/filtro/simple" className="dropdown-item">Simple</NavLink>   
+                                <NavLink to="/catalogo/filtro/pack" className="dropdown-item">Conjuntos </NavLink>                                
+                                <NavLink to="/catalogo/filtro/conjunto" className="dropdown-item">Corpiños</NavLink>
+                                <NavLink to="/catalogo/filtro/simple" className="dropdown-item">Bombis</NavLink>
+                                <NavLink to="/catalogo/filtro/simple" className="dropdown-item">Medias</NavLink>   
+                                <NavLink to="/catalogo/filtro/simple" className="dropdown-item">Pijamas</NavLink>   
+                                <NavLink to="/catalogo/filtro/simple" className="dropdown-item">Bustier/Bodys</NavLink>   
+                                <NavLink to="/catalogo/filtro/simple" className="dropdown-item">Indumentaria niñas</NavLink>
+                                <NavLink to="/catalogo/filtro/simple" className="dropdown-item">Textiles/BodySplash</NavLink>       
                             </NavDropdown>
                             <NavLink to="/carrito" className={"nav-link"} ><CartWidget/></NavLink>
                         </Nav>

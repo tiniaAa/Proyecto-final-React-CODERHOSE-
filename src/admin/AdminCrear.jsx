@@ -91,9 +91,14 @@ const AdminCrear = ({ onGuardarProducto }) => {
                         <Form.Label className="fw-semibold">Categoría</Form.Label>
                         <Form.Select name="categoria" onChange={handleChange} required>
                             <option value="">Selecciona una...</option>
-                            <option value="Conjunto">Conjunto</option>
-                            <option value="Pack">Pack</option>
-                            <option value="Elemento">Elemento</option>
+                            <option value="Conjunto">Conjuntos</option>
+                            <option value="Pack">Corpiños</option>
+                            <option value="Elemento">Bombis</option>
+                            <option value="Elemento">Medias</option>
+                            <option value="Elemento">Pijamas</option>
+                            <option value="Elemento">Bustier/Bodys</option>
+                            <option value="Elemento">Indumentaria niñas</option>
+                            <option value="Elemento">Textiles/BodySplash</option>
                         </Form.Select>
                     </Form.Group>
                 </Row>

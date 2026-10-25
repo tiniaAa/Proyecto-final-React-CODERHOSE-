@@ -135,9 +135,14 @@ const AdminModificar = ({ productoInicial, onActualizarProducto, onEliminarProdu
                                 <Form.Group as={Col} md="6" className="mb-3">
                                     <Form.Label className="text-muted mb-1" style={{ fontSize: "0.85rem" }}>Categoría</Form.Label>
                                     <Form.Select name="categoria" value={producto.categoria} onChange={handleChange} size="sm">
-                                        <option value="Conjunto">Conjunto</option>
-                                        <option value="Pack">Pack</option>
-                                        <option value="Elemento">Elemento</option>
+                                        <option value="Conjunto">Conjuntos</option>
+                                        <option value="Pack">Corpiños</option>
+                                        <option value="Elemento">Bombis</option>
+                                        <option value="Elemento">Medias</option>
+                                        <option value="Elemento">Pijamas</option>
+                                        <option value="Elemento">Bustier/Bodys</option>
+                                        <option value="Elemento">Indumentaria niñas</option>
+                                        <option value="Elemento">Textiles/BodySplash</option>
                                     </Form.Select>
                                 </Form.Group>
                                 
