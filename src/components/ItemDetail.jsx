@@ -29,7 +29,7 @@ const ItemDetail = ({ producto }) => {
 
     return (
         <Container className="my-5">
-            <Row className="gx-5">
+            <Row className="gx-2 gx-md-5">
                 
                 {/* CARRUSEL DE IMÁGENES */}
                 <Col xs={12} md={7} className="text-center mb-4 mb-md-0 d-flex align-items-center justify-content-center">
