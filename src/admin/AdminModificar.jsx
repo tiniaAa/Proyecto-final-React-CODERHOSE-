@@ -1,4 +1,4 @@
-﻿import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Spinner, Badge } from 'react-bootstrap';
 import { BsTrash } from 'react-icons/bs';
 import { uploadToCloudinary } from '../services/cloudinary'; 
@@ -140,9 +140,9 @@ const AdminModificar = ({ productoInicial, onActualizarProducto, onEliminarProdu
                                         <option value="Bombis">Bombis</option>
                                         <option value="Medias">Medias</option>
                                         <option value="Pijamas">Pijamas</option>
-                                        <option value="Bustier\Bodys">Bustier/Bodys</option>
+                                        <option value="Bustier-Bodys">Bustier/Bodys</option>
                                         <option value="Indumentaria niñas">Indumentaria niñas</option>
-                                        <option value="Textiles\BodySplash">Textiles/BodySplash</option>
+                                        <option value="Textiles-BodySplash">Textiles/BodySplash</option>
                                     </Form.Select>
                                 </Form.Group>
                                 
@@ -181,7 +181,7 @@ const AdminModificar = ({ productoInicial, onActualizarProducto, onEliminarProdu
                                     </Form.Group>
                                     <Col md="2">
                                         {variaciones.length > 1 && (
-                                            <Button variant="outline-danger" size="sm" onClick={() => quitarVariacion(index)} className="w-100">
+                                            <Button variant="outline-danger" size="sm" onClick={() => quitarVariacion(index)} className="w-100" aria-label="Eliminar variación">
                                                 <BsTrash />
                                             </Button>
                                         )}
@@ -190,7 +190,7 @@ const AdminModificar = ({ productoInicial, onActualizarProducto, onEliminarProdu
                             ))}
                             
                             <Button variant="outline-dark" size="sm" onClick={agregarVariacion} className="mt-2 mb-4 w-50">
-                                + Agregar variacián
+                                + Agregar variación
                             </Button>
 
                             <hr className="my-3" />
@@ -202,7 +202,7 @@ const AdminModificar = ({ productoInicial, onActualizarProducto, onEliminarProdu
                                 
                                 {producto.activo ? (
                                     <Button type="button" variant="outline-danger" className="py-2" onClick={() => onEliminarProducto(producto.id)}>
-                                        Dar de Baja (Ocultar del Catalogo)
+                                        Dar de Baja (Ocultar del Catálogo)
                                     </Button>
                                 ) : (
                                     <Button type="button" variant="success" className="py-2 shadow-sm fw-bold" onClick={() => onRestaurarProducto(producto.id)}>

@@ -6,7 +6,7 @@ import { Container, Row, Col, Button, Card } from "react-bootstrap";
 import EmptyCart from "./EmptyCart"; // Importamos tu vista de carrito vacío
 
 const Cart = () => {
-    const { cart, eliminar, vaciar, totalPago } = useContext(CartContext);
+    const { cart, eliminar, vaciar, totalPago,sumarCantidad,restarCantidad } = useContext(CartContext);
 
     return (
         <Container className="my-5">
@@ -21,7 +21,9 @@ const Cart = () => {
                             <CartItem 
                                 key={keyId} 
                                 item={compra} 
-                                eliminar={eliminar} 
+                                eliminar={eliminar}
+                                sumarCantidad={sumarCantidad}
+                                restarCantidad={restarCantidad} 
                             />
                         )
                     })}

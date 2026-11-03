@@ -14,18 +14,18 @@ const Header = () => {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ms-auto">
-                            <NavLink to="/catalogo" className={"nav-link"}>Catalogo</NavLink>
-                            <NavDropdown title="Categorias" id="basic-nav-dropdown">                                
+                            <NavLink to="/catalogo" className={"nav-link"}>Catálogo</NavLink>
+                            <NavDropdown title="Categorías" id="basic-nav-dropdown">                                
                                 <NavLink to="/catalogo/filtro/Conjuntos" className="dropdown-item">Conjuntos </NavLink>                                
                                 <NavLink to="/catalogo/filtro/Corpiños" className="dropdown-item">Corpiños</NavLink>
                                 <NavLink to="/catalogo/filtro/Bombis" className="dropdown-item">Bombis</NavLink>
                                 <NavLink to="/catalogo/filtro/Medias" className="dropdown-item">Medias</NavLink>   
                                 <NavLink to="/catalogo/filtro/Pijamas" className="dropdown-item">Pijamas</NavLink>   
-                                <NavLink to="/catalogo/filtro/Bustier\Bodys" className="dropdown-item">Bustier/Bodys</NavLink>   
+                                <NavLink to="/catalogo/filtro/Bustier-Bodys" className="dropdown-item">Bustier/Bodys</NavLink>   
                                 <NavLink to="/catalogo/filtro/Indumentaria niñas" className="dropdown-item">Indumentaria niñas</NavLink>
-                                <NavLink to="/catalogo/filtro/Textiles\BodySplash" className="dropdown-item">Textiles/BodySplash</NavLink>       
+                                <NavLink to="/catalogo/filtro/Textiles-BodySplash" className="dropdown-item">Textiles/BodySplash</NavLink>       
                             </NavDropdown>
-                            <NavLink to="/carrito" className={"nav-link"} ><CartWidget/></NavLink>
+                            <NavLink to="/carrito" className={"nav-link"} aria-label="Ver carrito"><CartWidget/></NavLink>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

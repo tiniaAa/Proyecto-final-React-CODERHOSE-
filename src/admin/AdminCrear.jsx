@@ -1,4 +1,4 @@
-﻿import { useState } from 'react';
+import { useState } from 'react';
 import { Form, Button, Row, Col, Card, Spinner } from 'react-bootstrap';
 import { BsTrash } from 'react-icons/bs'; 
 import { uploadToCloudinary } from '../services/cloudinary'; // Importamos tu nuevo servicio
@@ -96,9 +96,9 @@ const AdminCrear = ({ onGuardarProducto }) => {
                             <option value="Bombis">Bombis</option>
                             <option value="Medias">Medias</option>
                             <option value="Pijamas">Pijamas</option>
-                            <option value="Bustier\Bodys">Bustier/Bodys</option>
+                            <option value="Bustier-Bodys">Bustier/Bodys</option>
                             <option value="Indumentaria niñas">Indumentaria niñas</option>
-                            <option value="Textiles\BodySplash">Textiles/BodySplash</option>
+                            <option value="Textiles-BodySplash">Textiles/BodySplash</option>
                         </Form.Select>
                     </Form.Group>
                 </Row>
@@ -143,7 +143,7 @@ const AdminCrear = ({ onGuardarProducto }) => {
                         </Form.Group>
                         <Col md="2">
                             {variaciones.length > 1 && (
-                                <Button variant="outline-danger" onClick={() => quitarVariacion(index)} className="w-100">
+                                <Button variant="outline-danger" onClick={() => quitarVariacion(index)} className="w-100" aria-label="Eliminar variación">
                                     <BsTrash />
                                 </Button>
                             )}

@@ -1,30 +1,13 @@
 @use "./variables.scss" as *;
-
-.card{
-    //max-width: 22rem;
-    margin: 1rem;
-    padding: 0.25rem;
-    background-color: #FFB8B8;
-    .card-body{
-        div{
-            display:  flex;
-            justify-content: center;
-            .agregarCarrito{
-                border-radius: 5px;
-                padding: 0.25rem;
-                margin-top: 1rem;
-                font-family: $fontCursiva;
-                font-size: 1.5;
-                background-color: $colorFondo;
-            }
-            .agregarCarrito:hover{
-                transition: .5s;
-                background-color: white;
-            }
-        }
-    }
-    
-}
-.imagenDetail{
+.imagenDetail {
     height: 25rem;
+}
+// Altura adaptada: 380px en celulares y 550px en PC/Tablets
+.imagen-detalle {
+    height: 380px;
+    object-fit: contain;
+    background-color: #f8f9fa;
+    @media (min-width: 768px) {
+        height: 550px;
+    }
 }

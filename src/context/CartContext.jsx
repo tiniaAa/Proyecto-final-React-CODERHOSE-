@@ -54,9 +54,31 @@ export const CartProvider =({children})=>{
         const productoCarrito = cart.find((prod) => prod.variacion.id === variacionId)
         return productoCarrito ? productoCarrito.cantidad : 0;
     }
+    const sumarCantidad = (variacionId) => {
+        setCart(cart.map((prod) => {
+            if (prod.variacion.id === variacionId) {
+                // Verificamos no pasarnos del stock
+                    if (prod.cantidad < prod.variacion.stock) {
+                        return { ...prod, cantidad: prod.cantidad + 1 };
+                    }
+                }
+                return prod;
+            })
+        );
+    };
+    const restarCantidad = (variacionId) => {
+        setCart(cart.map((prod) => {
+            if (prod.variacion.id === variacionId) {
+                if (prod.cantidad > 1) {
+                    return { ...prod, cantidad: prod.cantidad - 1 };
+                }
+            }
+            return prod;
+        }));
+    };
 
     return(
-        <CartContext.Provider value={{cart, agregar, eliminar, vaciar, totalPago, cantidadCarrito, cantidadItem}}>
+        <CartContext.Provider value={{cart, agregar, eliminar, vaciar, totalPago, cantidadCarrito, cantidadItem, sumarCantidad,restarCantidad}}>
             {children}
         </CartContext.Provider>
     )

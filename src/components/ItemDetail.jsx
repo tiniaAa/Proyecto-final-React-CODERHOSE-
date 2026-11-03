@@ -33,15 +33,21 @@ const ItemDetail = ({ producto }) => {
                 
                 {/* CARRUSEL DE IMÁGENES */}
                 <Col xs={12} md={7} className="text-center mb-4 mb-md-0 d-flex align-items-center justify-content-center">
-                    <Carousel className="w-100 shadow-sm rounded bg-white" data-bs-theme="dark">
+                    <Carousel 
+                        className="w-100 shadow-sm rounded bg-white" 
+                        data-bs-theme="dark"
+                        controls={imagenes.length > 1}
+                        indicators={imagenes.length > 1}
+                        prevLabel="Anterior"
+                        nextLabel="Siguiente"
+                    >
                         {imagenes.map((url, idx) => (
                             <Carousel.Item key={idx}>
                                 <Image 
                                     src={url} 
                                     alt={`${producto.nombre} - Foto ${idx+1}`} 
                                     fluid 
-                                    className="d-block w-100"
-                                    style={{ height: "550px", objectFit: "contain", backgroundColor: "#f8f9fa" }} 
+                                    className="d-block w-100 imagen-detalle"
                                 />
                             </Carousel.Item>
                         ))}
@@ -55,8 +61,8 @@ const ItemDetail = ({ producto }) => {
                             Nuevo | {producto.categoria || "Catálogo"}
                         </span>
                         
-                        <h3 className="fw-bold mb-3">{producto.nombre}</h3>
-                        <h2 className="display-6 fw-normal mb-4">${producto.precio}</h2>
+                        <h1 className="fw-bold fs-3 mb-3">{producto.nombre}</h1>
+                        <span className="display-6 fw-normal mb-4 text-dark d-block">${producto.precio}</span>
                         
                         <div className="mb-4">
                             <Form.Group>

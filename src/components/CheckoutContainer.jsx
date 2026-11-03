@@ -6,10 +6,12 @@ import ResumeFinal from "./ResumeFinal";
 import { useCheckout } from "../hooks/useCheckout";
 import { usePagoRetorno } from "../hooks/usePagoRetorno";
 import { getCostoEnvio } from "../services/ordenes";
+import { useCheckoutForm } from "../hooks/useCheckoutForm"; 
+import { Link } from "react-router-dom";
 
 const CheckoutContainer = () => {
     const { cart, vaciar, totalPago } = useContext(CartContext);
-    const [comprador, setComprador] = useState({});
+    const { Comprador, errores, HandleChange, ValidarFormulario } = useCheckoutForm();
     const [paso, setPaso] = useState('formulario');
     const [ordenId, setOrdenId] = useState('');
     const [errorMsg, setErrorMsg] = useState('');
@@ -40,14 +42,21 @@ const CheckoutContainer = () => {
 
     const guardarComprador = (e) => {
         setComprador({
-            ...comprador,
+            ...Comprador,
             [e.target.name]: e.target.value
         });
     };
 
+    const VolverAFormulario = () => {
+    setPaso('formulario');
+    };
     const irAResumen = (evento) => {
         evento.preventDefault();
-        setPaso('resumen');
+        const valido = ValidarFormulario()
+
+        if(valido){
+            setPaso('resumen');
+        }        
     };
 
     const terminarCompra = async () => {
@@ -57,7 +66,7 @@ const CheckoutContainer = () => {
         // la reutilizamos en vez de crear otra.
         let id = ordenId;
         if (!id) {
-            const resultado = await procesarOrden(comprador, cart);
+            const resultado = await procesarOrden(Comprador, cart);
             if (!resultado.success) {
                 setErrorMsg(resultado.error);
                 return;
@@ -66,7 +75,7 @@ const CheckoutContainer = () => {
             setOrdenId(id);
         }
 
-        if (comprador.metodoPago === 'mercadopago') {
+        if (Comprador.metodoPago === 'mercadopago') {
             const pago = await pagarConMercadoPago(id);
             if (!pago.success) {
                 setErrorMsg(pago.error);
@@ -105,6 +114,16 @@ const CheckoutContainer = () => {
                     <div className={caja}>
                         <h2 className="text-success mb-3">¡Pago aprobado!</h2>
                         {numeroOrden}
+                        
+                        <p className="text-muted mb-1">
+                            Te enviamos un email con los detalles de tu compra.
+                        </p>
+                        <p className="text-secondary small mb-4">
+                            Si no lo encontrás en tu bandeja de entrada, por favor revisá tu carpeta de <strong>Spam</strong> o <strong>Correo no deseado</strong>.
+                        </p>
+                        <Link to="/" className="btn btn-dark px-4 py-2">
+                            Volver a la tienda
+                        </Link>
                     </div>
                 );
             case 'pendiente':
@@ -147,7 +166,17 @@ const CheckoutContainer = () => {
         return (
             <div className="p-5 text-center mt-5 bg-light rounded shadow-sm">
                 <h2 className="text-success mb-3">¡Compra confirmada!</h2>
-                <p className="fs-5">Tu número de orden es: <strong className="fs-4">{ordenId}</strong></p>
+                <p className="fs-5 mb-2">Tu número de orden es: <strong className="fs-4">{ordenId}</strong></p>
+                
+                <p className="text-muted mb-1">
+                    Te enviamos un email con los detalles de tu compra.
+                </p>
+                <p className="text-secondary small mb-4">
+                    Si no lo encontrás en tu bandeja de entrada, por favor revisá tu carpeta de <strong>Spam</strong> o <strong>Correo no deseado</strong>.
+                </p>
+                <Link to="/" className="btn btn-dark px-4 py-2">
+                    Volver a la tienda
+                </Link>
             </div>
         );
     }
@@ -157,10 +186,11 @@ const CheckoutContainer = () => {
             <>
                 {errorMsg && <div className="alert alert-danger mt-3">{errorMsg}</div>}
                 <ResumeFinal
-                    datosCliente={comprador}
+                    datosCliente={Comprador}
                     cart={cart}
                     totalPago={totalPago}
                     terminarCompra={terminarCompra}
+                    volverAFormulario={VolverAFormulario}
                     loading={loading}
                     costoEnvio={costoEnvio}
                 />
@@ -170,7 +200,9 @@ const CheckoutContainer = () => {
 
     return (
         <Checkout
-            guardarComprador={guardarComprador}
+            comprador={Comprador}
+            errores={errores}
+            handleChange={HandleChange}
             irAResumen={irAResumen}
         />
     );
